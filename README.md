@@ -1,6 +1,6 @@
-# prueba
+# Prueba tecnica
 
-> My fantastic Nuxt.js project
+> Ánimo a todos y todas. Espero y deseo que seais capaces de completar las máximas tareas extra posibles.
 
 ## Build Setup
 
