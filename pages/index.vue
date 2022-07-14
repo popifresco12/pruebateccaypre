@@ -1,3 +1,13 @@
+<style scoped>
+.price {
+  color: darkblue;
+  font-size:xx-large;
+}
+.check{
+  color: green;
+}
+
+</style>
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
@@ -42,16 +52,86 @@
       <br>
       <v-card>
         <v-card-title class="headline">Datos a transformar en fichas de producto</v-card-title>
-          <v-data-table :headers="headers" :items="articulos" :items-per-page="5" class="elevation-1"></v-data-table>
+          <!-- <v-data-table :headers="headers" :items="articulos" :items-per-page="5" class="elevation-1"></v-data-table> -->
+          <div class="row" id="listaproyectos" >
+            <div class="col-4" v-for="articulo in articulos"> 
+
+              <v-card
+                class="mx-auto my-12"
+                max-width="374"
+                max-height="1000"
+                
+              >
+
+                <v-img
+                  height="250"
+                  v-bind:src= "articulo.imagen_url"
+                ></v-img>
+
+                <v-card-title v-text="articulo.nombre"></v-card-title>
+
+                <v-card-text>
+                  <v-row
+                    align="center"
+                    class="mx-0"
+                  >
+                    <v-rating
+                      :value="4.5"
+                      color="amber"
+                      dense
+                      half-increments
+                      readonly
+                      size="14"
+                    ></v-rating>
+
+                    <div class="grey--text ms-4">
+                      4.5 (413)
+                    </div>
+                  </v-row>
+
+                </v-card-text>
+                <p align="center" class="price" v-text="articulo.precio">  
+                </p>
+
+                <p align="center" class="check">
+                  Disponible ✔  
+                </p>
+
+                <v-card-actions>
+                  <v-btn 
+                    color="error"
+                    depressed
+                  >
+                    Añadir al carrito
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+
+            </div>
+          </div>
+
+          <div class="text-center">
+            <v-pagination
+              v-model="page"
+              :length="4"
+              circle
+            ></v-pagination>
+          </div>
+          
       </v-card>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+  /* const { MongoClient, ServerApiVersion } = require("mongodb");
+  const uri = "mongodb+srv://carlos:1234@cluster0.westy.mongodb.net/?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
+  const findResult = await products.find() */
 export default {
     data () {
       return {
+        page: 1,
         headers: [ 
           { text: 'Nombre', align: 'start', sortable: false, value: 'nombre' },
           { text: 'Descripción Corta', value: 'desc_corta' },
@@ -70,6 +150,7 @@ export default {
           { nombre: 'Monitor Xiaomi MI 23,8" Full HD Desktop 1C LED IPS', desc_corta: 'Con su ángulo de visión de 178º, puedes lograr un rango de visión superior al de otros modelos, puedes tener las imágenes más espectaculares y maravillosas frente a tus ojos.', precio: 150, imagen_url: 'https://dist.megahogar.es/fotos/BHR4510GL_1.jpg' },
           { nombre: 'Monitor LED 23.6" AOC 24B1H Negro', desc_corta: 'Aspecto elegante y amplios ángulos de visión. Equipado con un panel VA, el 24B1H ofrece una asombrosa relación de contraste estático de 3000: 1 con negros oscuros profundos. ', precio: 159, imagen_url: 'https://dist.megahogar.es/fotos/24B1H_1.jpg' }
         ],
+        
       }
     },
   }
